@@ -1,6 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-import axios from "axios";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useRef } from "react";
 import CartItem from "./CartItem";
 import CheckoutButton from "./CheckoutButton";
 import EmptyCart from "../../components/NoItem/EmptyCart";

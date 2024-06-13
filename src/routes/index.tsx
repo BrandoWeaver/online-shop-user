@@ -86,7 +86,7 @@ const router = createBrowserRouter(
     {
       path: ROUTE_PATH.root,
       element: <Layout />,
-      errorElement: <Navigate to={ROUTE_PATH.root} />,
+      errorElement: <Navigate to={ROUTE_PATH.product} />,
       children: [
         {
           path: ROUTE_PATH.root,
@@ -143,8 +143,7 @@ const router = createBrowserRouter(
       ],
     },
   ],
-
-  { basename: process.env.REACT_APP_BASE_PATH || "/online-shopping/product" }
+  { basename: process.env.REACT_APP_PUBLIC_URL }
 );
 
 export { router };

@@ -31,7 +31,7 @@ const CusDialog = forwardRef<ICusDialogHandler, ICusDialog>((props, ref) => {
         props.onCloseDialog && props.onCloseDialog();
       },
     }),
-    []
+    [props]
   );
 
   return (

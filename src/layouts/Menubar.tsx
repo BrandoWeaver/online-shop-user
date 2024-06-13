@@ -14,14 +14,11 @@ import {
   // Typography,
   // useTheme,
 } from "@mui/material";
-import { IoChatboxEllipses } from "react-icons/io5";
 
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StorefrontRoundedIcon from "@mui/icons-material/StorefrontRounded";
-import { IoHome } from "react-icons/io5";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { ROUTE_PATH } from "../utils/route-util";

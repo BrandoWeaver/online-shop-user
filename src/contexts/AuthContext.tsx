@@ -100,7 +100,7 @@ export const AuthWrapper: React.FC<{ children: ReactNode }> = ({
           categories
         );
     }
-  }, [categories, authState?.isLogIn]);
+  }, [categories, authState?.isLogIn, authState?.rememberMe]);
   const updateUserType = (newUserType: string) => {
     setAuthState((prevAuthState: AuthState) => ({
       ...prevAuthState,

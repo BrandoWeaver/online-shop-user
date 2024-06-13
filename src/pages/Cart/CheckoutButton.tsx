@@ -1,7 +1,6 @@
 import React from "react";
-import { Button, Typography, Box, Badge } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { styled } from "@mui/material/styles";
 
 const CheckoutButton = ({
   count,

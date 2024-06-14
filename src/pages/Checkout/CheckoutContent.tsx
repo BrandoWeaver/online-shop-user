@@ -120,7 +120,7 @@ function CheckoutContent(props: IcheckoutContent) {
   );
   const handleOrder = () => {
     const items = cart.map((value) => {
-      return { product: value._id, quantity: value.cartQuantity };
+      return { product: value._id, quantity: value?.cartQuantity };
     });
     const orderData = {
       userId: authState.userId,
@@ -274,7 +274,13 @@ function CheckoutContent(props: IcheckoutContent) {
             variant="contained"
             // disabled={!placeName}
             sx={{ borderRadius: 5, width: "100%", mb: 2, mt: 2 }}
-            onClick={() => openRef.current?.open()}
+            onClick={() => {
+              if (authState?.isLogIn) {
+                openRef.current?.open();
+              } else {
+                navigate(ROUTE_PATH.login);
+              }
+            }}
           >
             Place Order ${getTotalPrice().toFixed(2)}
           </Button>

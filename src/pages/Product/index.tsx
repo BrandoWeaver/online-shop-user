@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ROUTE_PATH } from "../../utils/route-util";
@@ -11,9 +11,12 @@ import ProductDrawer from "./ProductDrawer";
 import ProductCard from "./productCard";
 import SectionHeader from "./SectionHeader";
 import { useAuthContext } from "../../contexts/AuthContext";
+import { CartContext } from "../../contexts/CartContext";
 function Product() {
   const navigate = useNavigate();
   const { setCategories } = useAuthContext();
+  const { cart, getTotalPrice, clearCart } = useContext(CartContext)!;
+
   // const [listCate, setCate] = useState<Iproduct.Category[]>([]);
   // const [search, setSearch] = useState("");
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -135,30 +138,36 @@ function Product() {
                   },
                 }}
               >
-                {allPopularProduct.products.map((product, index) => (
-                  <Box
-                    key={product._id}
-                    onClick={() => {
-                      // navigate(ROUTE_PATH.productDetail.replace(":id", "1"));
-                      setDrawerOpen(true);
-                    }}
-                    sx={{ mr: 1 }}
-                  >
-                    <ProductCard
-                      image={product.image}
-                      price={product.price}
-                      name={product.name}
-                      _id={product._id}
-                      description={product.description}
-                      cate_id={product.cate_id}
-                      quantity={product.quantity}
-                      status={product.status}
-                      createdAt={product.createdAt}
-                      updatedAt={product.updatedAt}
-                      __v={product.__v}
-                    />
-                  </Box>
-                ))}
+                {allPopularProduct.products.map((product, index) => {
+                  const isProductIdIncluded = Object.values(cart).some(
+                    (products) => allPopularProduct.products.includes(products)
+                  );
+                  return (
+                    <Box
+                      key={product._id}
+                      onClick={() => {
+                        // navigate(ROUTE_PATH.productDetail.replace(":id", "1"));
+                        setDrawerOpen(true);
+                      }}
+                      sx={{ mr: 1 }}
+                    >
+                      <ProductCard
+                        isProductIdIncluded={isProductIdIncluded}
+                        image={product.image}
+                        price={product.price}
+                        name={product.name}
+                        _id={product._id}
+                        description={product.description}
+                        cate_id={product.cate_id}
+                        quantity={product.quantity}
+                        status={product.status}
+                        createdAt={product.createdAt}
+                        updatedAt={product.updatedAt}
+                        __v={product.__v}
+                      />
+                    </Box>
+                  );
+                })}
               </Box>
             )
           )}
@@ -218,30 +227,36 @@ function Product() {
                   },
                 }}
               >
-                {allProduct.products.map((product, index) => (
-                  <Box
-                    key={product._id}
-                    onClick={() => {
-                      // navigate(ROUTE_PATH.productDetail.replace(":id", "1"));
-                      setDrawerOpen(true);
-                    }}
-                    sx={{ mr: 1 }}
-                  >
-                    <ProductCard
-                      image={product.image}
-                      price={product.price}
-                      name={product.name}
-                      _id={product._id}
-                      description={product.description}
-                      cate_id={product.cate_id}
-                      quantity={product.quantity}
-                      status={product.status}
-                      createdAt={product.createdAt}
-                      updatedAt={product.updatedAt}
-                      __v={product.__v}
-                    />
-                  </Box>
-                ))}
+                {allProduct.products.map((product, index) => {
+                  const isProductIdIncluded = Object.values(cart).some(
+                    (products) => allProduct.products.includes(products)
+                  );
+                  return (
+                    <Box
+                      key={product._id}
+                      onClick={() => {
+                        // navigate(ROUTE_PATH.productDetail.replace(":id", "1"));
+                        setDrawerOpen(true);
+                      }}
+                      sx={{ mr: 1 }}
+                    >
+                      <ProductCard
+                        isProductIdIncluded={isProductIdIncluded}
+                        image={product.image}
+                        price={product.price}
+                        name={product.name}
+                        _id={product._id}
+                        description={product.description}
+                        cate_id={product.cate_id}
+                        quantity={product.quantity}
+                        status={product.status}
+                        createdAt={product.createdAt}
+                        updatedAt={product.updatedAt}
+                        __v={product.__v}
+                      />
+                    </Box>
+                  );
+                })}
               </Box>
             )
           )}

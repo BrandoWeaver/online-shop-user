@@ -52,7 +52,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
                 <Grid item xs={7}>
                   <ListItemText
                     primary={item.name}
-                    secondary={`x${item.cartQuantity}`}
+                    secondary={`x${item?.cartQuantity}`}
                     sx={{
                       display: "-webkit-box",
                       WebkitBoxOrient: "vertical",

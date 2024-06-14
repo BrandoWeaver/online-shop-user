@@ -15,6 +15,7 @@ declare namespace Iproduct {
     createdAt: string;
     updatedAt: string;
     __v: number;
+    isProductIdIncluded?: boolean;
   }
 
   export interface Icate {

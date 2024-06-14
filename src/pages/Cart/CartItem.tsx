@@ -45,7 +45,7 @@ const CartItem = ({ item }: { item: any }) => {
           <RemoveIcon />
         </IconButton>
         <Typography variant="body1" mx={2}>
-          {item.cartQuantity}
+          {item?.cartQuantity}
         </Typography>
         <IconButton onClick={() => increaseQuantity(item._id)} color="primary">
           <AddIcon />

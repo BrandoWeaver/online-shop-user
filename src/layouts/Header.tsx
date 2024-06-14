@@ -32,7 +32,7 @@ const Header = () => {
             <Avatar
               sx={{ width: 50, height: 50 }}
               variant="square"
-              src={`${process.env.REACT_APP_BASE_PATH}/assets/images/logo.png`}
+              src={`${process.env.REACT_APP_PUBLIC_URL}assets/images/logo.png`}
             />
           </Grid>
           <Grid item xs>

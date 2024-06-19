@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Skeleton, Typography, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ROUTE_PATH } from "../../utils/route-util";
 import { LoadingSpiner } from "../../components/Loading";
@@ -67,6 +67,7 @@ function Product() {
         console.log("errRes", err);
       },
     });
+
   return (
     <Box
       sx={{
@@ -91,13 +92,17 @@ function Product() {
       {loadingLogin ? (
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "calc(100vh - 320px)",
+            // display: "flex",
+            // justifyContent: "center",
+            // alignItems: "center",
+            px: 2,
           }}
         >
-          <LoadingSpiner size={25} />
+          <Skeleton
+            variant="rectangular"
+            height={212}
+            sx={{ borderRadius: 2 }}
+          />
         </Box>
       ) : (
         <>
@@ -150,7 +155,9 @@ function Product() {
                         setDrawerOpen(true);
                         setProdudctDetail(product);
                       }}
-                      sx={{ mr: 1 }}
+                      sx={{
+                        mr: 1,
+                      }}
                     >
                       <ProductCard
                         isProductIdIncluded={isProductIdIncluded}
@@ -182,13 +189,18 @@ function Product() {
       {loadingLogin ? (
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "calc(100vh - 320px)",
+            // display: "flex",
+            // justifyContent: "center",
+            // alignItems: "center",
+            px: 2,
+            pb: 10,
           }}
         >
-          <LoadingSpiner size={25} />
+          <Skeleton
+            variant="rectangular"
+            height={212}
+            sx={{ borderRadius: 2 }}
+          />
         </Box>
       ) : (
         <>
@@ -242,7 +254,7 @@ function Product() {
                         console.log("productDetail", product);
                         setProdudctDetail(product);
                       }}
-                      sx={{ mr: 1 }}
+                      sx={{ mr: 1, pb: 8 }}
                     >
                       <ProductCard
                         isProductIdIncluded={isProductIdIncluded}

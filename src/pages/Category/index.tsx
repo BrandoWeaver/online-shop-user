@@ -9,9 +9,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import CheckoutButton from "../Cart/CheckoutButton";
 import { CartContext } from "../../contexts/CartContext";
 import { ROUTE_PATH } from "../../utils/route-util";
+import ProductDrawer from "../Product/ProductDrawer";
 
 function CategoryList() {
   const currentId = useParams();
+  const [produtDetail, setProdudctDetail] = useState<Iproduct.Product>();
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const { cart, getTotalPrice, getProductIds } = useContext(CartContext)!;
   const navigate = useNavigate();
   console.log("id", currentId.id);
@@ -42,6 +45,11 @@ function CategoryList() {
 
   return (
     <Box>
+      <ProductDrawer
+        drawerOpen={drawerOpen}
+        setDrawerOpen={setDrawerOpen}
+        productDetail={produtDetail}
+      />
       <Box sx={{ position: "sticky", top: 0, zIndex: 1 }}>
         <CateHead
           allCategories={allCategories?.categories}
@@ -66,7 +74,16 @@ function CategoryList() {
           <Grid container px={2} mt={13} spacing={1}>
             {allProduct &&
               allProduct.products.map((product, index) => (
-                <Grid item xs={6} md={2} key={product._id}>
+                <Grid
+                  item
+                  xs={6}
+                  md={2}
+                  key={product._id}
+                  onClick={() => {
+                    setProdudctDetail(product);
+                    setDrawerOpen(true);
+                  }}
+                >
                   <ProductCard
                     image={product.image}
                     price={product.price}

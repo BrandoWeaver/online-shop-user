@@ -1,18 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import {
-  Typography,
-  Button,
-  IconButton,
-  Radio,
-  FormControlLabel,
-  RadioGroup,
-  Box,
-  Avatar,
-} from "@mui/material";
+import { Typography, Button, IconButton, Box, Avatar } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import CloseIcon from "@mui/icons-material/Close";
-import ShareIcon from "@mui/icons-material/Share";
 import ReusableDrawer from "../../components/Drawer/DrawerCom";
 import { CartContext } from "../../contexts/CartContext";
 interface Iproduct {
@@ -21,16 +11,16 @@ interface Iproduct {
   productDetail: Iproduct.Product | undefined;
 }
 function ProductDrawer(props: Iproduct) {
-  const [selectedFormat, setSelectedFormat] = React.useState("500G");
+  // const [selectedFormat, setSelectedFormat] = React.useState("500G");
   const [quantity, setQuantity] = React.useState(1);
   const { addToCart } = useContext(CartContext)!;
   const toggleDrawer = (open: boolean) => () => {
     props.setDrawerOpen(open);
   };
 
-  const handleFormatChange = (event: any) => {
-    setSelectedFormat(event.target.value);
-  };
+  // const handleFormatChange = (event: any) => {
+  //   setSelectedFormat(event.target.value);
+  // };
 
   const handleQuantityChange = (amount: number) => {
     setQuantity((prev) => Math.max(1, prev + amount));
@@ -131,7 +121,8 @@ function ProductDrawer(props: Iproduct) {
             style={{ marginTop: "20px" }}
           >
             Add to Cart • $
-            {(quantity * (selectedFormat === "500G" ? 0.6 : 1.0)).toFixed(2)}
+            {props.productDetail?.price &&
+              (quantity * props.productDetail?.price).toFixed(2)}
           </Button>
         </Box>
       </ReusableDrawer>

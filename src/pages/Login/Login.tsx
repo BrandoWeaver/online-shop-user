@@ -11,12 +11,14 @@ import {
   CusPasswordInputBig,
   CusTextFieldBig,
 } from "../../components/CusMuiCom/CusInputs";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { ROUTE_PATH } from "../../utils/route-util";
 import { useRequest } from "ahooks";
 import { Auth } from "../../api/Auth";
 import { Link, Navigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { LoadingSpiner } from "../../components/Loading";
+import theme from "../../themes";
 
 interface Iform {
   name: string;
@@ -74,12 +76,30 @@ const Login = () => {
       <Box
         component="form"
         noValidate
-        sx={{ mt: 1, padding: "64px", width: "495px" }}
+        sx={{ mt: 1, padding: { xs: 3, md: "64px" }, width: "495px" }}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <Typography variant="h4" color={"text.info"} sx={{ pb: "16px" }}>
-          Sign in
-        </Typography>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
+          <Box>
+            <Button
+              sx={{
+                px: 1,
+                textTransform: "none",
+                background: theme.palette.background.default,
+              }}
+              onClick={() => {
+                window.history.back();
+              }}
+            >
+              <ArrowBackIcon sx={{ color: theme.palette.grey["600"] }} />
+            </Button>
+          </Box>
+          <Box>
+            <Typography variant="h4" color={"text.info"} sx={{ pb: "16px" }}>
+              Sign in
+            </Typography>
+          </Box>
+        </Box>
 
         <Controller
           name="name"

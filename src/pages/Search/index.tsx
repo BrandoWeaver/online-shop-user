@@ -50,10 +50,10 @@ function Search() {
   return (
     <Box sx={{ background: theme.palette.background.paper }}>
       <Box
-        sx={{
-          background: theme.palette.background.paper,
-          height: "calc(100vh - 0px)",
-        }}
+      // sx={{
+      //   background: theme.palette.background.paper,
+      //   height: "calc(100vh - 0px)",
+      // }}
       >
         <Box
           sx={{

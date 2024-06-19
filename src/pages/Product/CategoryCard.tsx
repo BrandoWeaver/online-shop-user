@@ -14,7 +14,7 @@ const CategoryGrid = (props: CategoryCard) => {
         <Box sx={{ px: 2 }}>
           <Skeleton
             variant="rectangular"
-            height={118}
+            height={200}
             sx={{ borderRadius: 2 }}
           />
         </Box>

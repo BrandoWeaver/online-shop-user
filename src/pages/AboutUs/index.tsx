@@ -5,13 +5,10 @@ import {
   Link,
   Grid,
   IconButton,
-  Avatar,
   useTheme,
 } from "@mui/material";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LanguageIcon from "@mui/icons-material/Language";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TelegramIcon from "@mui/icons-material/Telegram";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const AboutUs = () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Drawer, Box } from "@mui/material";
+import { Drawer, Box, Dialog } from "@mui/material";
 
 interface ReusableDrawerProps {
   anchor: "top" | "bottom" | "left" | "right";
@@ -17,11 +17,38 @@ const ReusableDrawer: React.FC<ReusableDrawerProps> = ({
   height,
 }) => {
   return (
-    <Drawer anchor={anchor} open={open} onClose={onClose}>
-      <Box height={height} sx={{ overflow: "scroll", pb: 7 }}>
+    <>
+      <Dialog
+        open={open}
+        onClose={onClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        sx={{
+          display: { xs: "none", md: "flex" },
+          justifyContent: "center",
+          "& .MuiPaper-root": { borderRadius: 5 },
+        }}
+      >
         {children}
-      </Box>
-    </Drawer>
+      </Dialog>
+
+      <Drawer
+        anchor={anchor}
+        open={open}
+        onClose={onClose}
+        sx={{ display: { xs: "flex", md: "none" } }}
+      >
+        <Box
+          height={height}
+          sx={{
+            overflow: "auto",
+            pb: 7,
+          }}
+        >
+          {children}
+        </Box>
+      </Drawer>
+    </>
   );
 };
 

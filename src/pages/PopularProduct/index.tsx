@@ -92,6 +92,7 @@ function PopularProduct() {
                 <Grid
                   item
                   xs={6}
+                  md={2}
                   key={product._id}
                   onClick={() => {
                     setProdudctDetail(product);

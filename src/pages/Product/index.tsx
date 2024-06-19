@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { Box, Skeleton, Typography, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ROUTE_PATH } from "../../utils/route-util";
-import { LoadingSpiner } from "../../components/Loading";
 import ErrorResponse from "../../components/ErrorResponse";
 import { useRequest } from "ahooks";
 import { PRODUCT_API } from "../../api/Product";
@@ -15,10 +14,9 @@ import { CartContext } from "../../contexts/CartContext";
 function Product() {
   const navigate = useNavigate();
   const { setCategories } = useAuthContext();
+  const [callData, setCallNewData] = useState(1);
   const { cart } = useContext(CartContext)!;
   const [produtDetail, setProdudctDetail] = useState<Iproduct.Product>();
-  // const [listCate, setCate] = useState<Iproduct.Category[]>([]);
-  // const [search, setSearch] = useState("");
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const {
     runAsync: fetchProductList,
@@ -32,6 +30,8 @@ function Product() {
     onError: (err) => {
       console.log("errRes", err);
     },
+    cacheKey: `listProduct-${callData}`,
+    staleTime: -1,
   });
   const { loading: loadingCategories, data: allCategories } = useRequest(
     PRODUCT_API.listCategory,
@@ -49,11 +49,10 @@ function Product() {
       onError: (err) => {
         console.log("errRes", err);
       },
+      cacheKey: `listCategories-${callData}`,
+      staleTime: -1,
     }
   );
-  // useEffect(() => {
-  //   fetchProductList();
-  // }, [search, listCate]);
   const theme = useTheme();
   const handleRefresh = () => {
     fetchProductList();
@@ -66,6 +65,8 @@ function Product() {
       onError: (err) => {
         console.log("errRes", err);
       },
+      cacheKey: `listpopularProduct-${callData}`,
+      staleTime: -1,
     });
 
   return (

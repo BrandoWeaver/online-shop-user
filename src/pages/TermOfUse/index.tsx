@@ -122,7 +122,7 @@ const TermsOfService = () => {
         </Typography>
         <Typography variant="body1" paragraph>
           You may ask us to delete or remove your Account/Data and stop using
-          the platform by emailing info@moreplus.com.kh. Please provide us your
+          the platform by emailing info@onlinshop.com.kh. Please provide us your
           complete name, bank account or card from your account before emailing
           the account deletion request to us.
         </Typography>
@@ -131,7 +131,7 @@ const TermsOfService = () => {
         </Typography>
         <Typography variant="body1" paragraph>
           If we decide to change our privacy policy, we will post those changes
-          on this page. This policy was last modified on May 11, 2023.
+          on this page. This policy was last modified on May 11, 2024.
         </Typography>
         <Typography variant="h5" gutterBottom>
           Contacting Us:
@@ -141,8 +141,8 @@ const TermsOfService = () => {
           contact us using the information below.
         </Typography>
         <Typography variant="body1" paragraph>
-          More Plus! Online Ordering and Delivery Service Phnom Penh, Cambodia
-          Tel: 012 738 526 Email: info@moreplus.com.kh | www.moreplus.com.kh
+          Online Shop! Online Ordering and Delivery Service Phnom Penh, Cambodia
+          Tel: 012 738 526 Email: info@onlinshop.com.kh | www.moreplus.com.kh
         </Typography>
       </Box>
     </Box>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Typography,
   Button,
@@ -7,20 +7,23 @@ import {
   FormControlLabel,
   RadioGroup,
   Box,
+  Avatar,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import CloseIcon from "@mui/icons-material/Close";
 import ShareIcon from "@mui/icons-material/Share";
 import ReusableDrawer from "../../components/Drawer/DrawerCom";
+import { CartContext } from "../../contexts/CartContext";
 interface Iproduct {
   drawerOpen: boolean;
   setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  productDetail: Iproduct.Product | undefined;
 }
 function ProductDrawer(props: Iproduct) {
   const [selectedFormat, setSelectedFormat] = React.useState("500G");
   const [quantity, setQuantity] = React.useState(1);
-
+  const { addToCart } = useContext(CartContext)!;
   const toggleDrawer = (open: boolean) => () => {
     props.setDrawerOpen(open);
   };
@@ -32,7 +35,11 @@ function ProductDrawer(props: Iproduct) {
   const handleQuantityChange = (amount: number) => {
     setQuantity((prev) => Math.max(1, prev + amount));
   };
-
+  useEffect(() => {
+    if (!props.drawerOpen) {
+      setQuantity(1);
+    }
+  }, [props.drawerOpen]);
   return (
     <div>
       <ReusableDrawer
@@ -47,27 +54,38 @@ function ProductDrawer(props: Iproduct) {
             justifyContent="space-between"
             alignItems="center"
           >
-            <Typography variant="h6">Bok Choy</Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                display: "-webkit-box",
+                WebkitBoxOrient: "vertical",
+                WebkitLineClamp: { xs: 1, md: 2 },
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {props.productDetail?.name}
+            </Typography>
             <Box>
-              <IconButton>
+              {/* <IconButton>
                 <ShareIcon />
-              </IconButton>
+              </IconButton> */}
               <IconButton onClick={toggleDrawer(false)}>
                 <CloseIcon />
               </IconButton>
             </Box>
           </Box>
           <Box textAlign="center" mt={2}>
-            <img
-              src="https://via.placeholder.com/150"
+            <Avatar
+              src={props.productDetail?.image}
               alt="Bok Choy"
-              style={{ width: "100%", borderRadius: "10px" }}
+              style={{ width: "100%", borderRadius: "10px", height: "250px" }}
             />
           </Box>
           <Typography variant="body1" mt={2}>
             In-Stock: <span style={{ color: "blue" }}>100+</span>
           </Typography>
-          <Typography variant="h4" mt={1}>
+          {/* <Typography variant="h4" mt={1}>
             $0.60
           </Typography>
           <Typography variant="body1" mt={2}>
@@ -85,6 +103,7 @@ function ProductDrawer(props: Iproduct) {
               label="KG - $1.00"
             />
           </RadioGroup>
+          */}
           <Box
             display="flex"
             justifyContent="center"
@@ -105,7 +124,10 @@ function ProductDrawer(props: Iproduct) {
             variant="contained"
             color="primary"
             fullWidth
-            onClick={toggleDrawer(false)}
+            onClick={() => {
+              props.setDrawerOpen(false);
+              props.productDetail && addToCart(props.productDetail, quantity);
+            }}
             style={{ marginTop: "20px" }}
           >
             Add to Cart • $

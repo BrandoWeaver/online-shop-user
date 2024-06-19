@@ -67,6 +67,7 @@ function PopularProduct() {
                 createdAt={product.createdAt}
                 updatedAt={product.updatedAt}
                 __v={product.__v}
+                width="auto"
               />
             </Grid>
           ))}

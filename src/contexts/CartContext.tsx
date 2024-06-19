@@ -6,7 +6,7 @@ export interface CartItem extends Iproduct.Product {
 
 interface CartContextType {
   cart: CartItem[];
-  addToCart: (product: Iproduct.Product) => void;
+  addToCart: (product: Iproduct.Product, quantity?: number) => void;
   removeFromCart: (productId: string) => void;
   clearCart: () => void;
   getTotalPrice: () => number;
@@ -34,7 +34,7 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (product: Iproduct.Product) => {
+  const addToCart = (product: Iproduct.Product, quantity?: number) => {
     setCart((prevCart) => {
       const existingProductIndex = prevCart.findIndex(
         (item) => item._id === product._id
@@ -44,7 +44,7 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         updatedCart[existingProductIndex].cartQuantity += 1;
         return updatedCart;
       } else {
-        return [...prevCart, { ...product, cartQuantity: 1 }];
+        return [...prevCart, { ...product, cartQuantity: quantity || 1 }];
       }
     });
   };

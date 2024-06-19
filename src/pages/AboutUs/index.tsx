@@ -36,19 +36,19 @@ const AboutUs = () => {
           <Typography variant="h5">About Us</Typography>
         </Box>
       </Box>
-      <Box bgcolor="#fff" p={2} borderRadius={2} boxShadow={1} mb={3}>
+      <Box p={2} borderRadius={2} mb={3}>
         <Typography variant="h6" color="primary" gutterBottom>
-          About More Plus
+          About Online Shop
         </Typography>
         <Typography variant="body1" paragraph>
-          More Plus was established in July 22, 2023 by four founders who came
-          together with a vision to provide the best quality of agricultural
-          products and safe foodstuffs to everyone in Cambodia. The first outlet
-          of More Plus opened on street 1031 in Banlasaeth village, Sangkat
-          Khmuonh, Khan Sensok, Phnom Penh and was called More Plus.
+          Online Shop was established in May 22, 2024 by Srun Rotha who came
+          with a vision to provide the best quality of agricultural products and
+          safe foodstuffs to everyone in Cambodia. The first outlet of Online
+          Shop opened on street 1031 in Banlasaeth village, Sangkat Khmuonh,
+          Khan Sensok, Phnom Penh and was called Online Shop.
         </Typography>
         <Typography variant="body1" paragraph>
-          More Plus is a retail, wholesale and distributor of agricultural
+          Online Shop is a retail, wholesale and distributor of agricultural
           products and safety foodstuff standards that provide all people with
           good health, longevity and a prosperous future. Our market is fast
           gaining popularity because of providing our customers with high
@@ -60,7 +60,7 @@ const AboutUs = () => {
         </Typography>
       </Box>
 
-      <Box bgcolor="#fff" p={2} borderRadius={2} boxShadow={1} mb={3}>
+      <Box p={2} borderRadius={2} mb={3}>
         <Typography variant="h6" color="primary" gutterBottom>
           Contact Us
         </Typography>
@@ -69,7 +69,7 @@ const AboutUs = () => {
             <PhoneIcon />
           </Grid>
           <Grid item>
-            <Typography variant="body1">Customer Support: 085679999</Typography>
+            <Typography variant="body1">Customer Support: 081278126</Typography>
           </Grid>
         </Grid>
         <Grid container alignItems="center" spacing={1} mt={1}>
@@ -83,20 +83,20 @@ const AboutUs = () => {
               rel="noopener"
               color="inherit"
             >
-              moreplus.com.kh
+              www.onlineshop.com.kh
             </Link>
           </Grid>
         </Grid>
       </Box>
 
-      <Box bgcolor="#fff" p={2} borderRadius={2} boxShadow={1} mb={3}>
+      {/* <Box bgcolor="#fff" p={2} borderRadius={2} boxShadow={1} mb={3}>
         <Typography variant="h6" color="primary" gutterBottom>
           Location
         </Typography>
         <Avatar src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.555864194936!2d104.88699301536606!3d11.556442047529583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3109515b775ae9ff%3A0xa476dfc21f0b0dd0!2sCenter%20for%20Banking%20Studies!5e0!3m2!1sen!2skh!4v1622020190985!5m2!1sen!2skh" />
-      </Box>
+      </Box> */}
 
-      <Box bgcolor="#fff" p={2} borderRadius={2} boxShadow={1} mb={3}>
+      {/* <Box bgcolor="#fff" p={2} borderRadius={2} boxShadow={1} mb={3}>
         <Typography variant="h6" color="primary" gutterBottom>
           Follow Us
         </Typography>
@@ -116,7 +116,7 @@ const AboutUs = () => {
             <TelegramIcon />
           </IconButton>
         </Box>
-      </Box>
+      </Box> */}
     </Box>
   );
 };

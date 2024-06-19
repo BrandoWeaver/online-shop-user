@@ -6,30 +6,32 @@ import {
   IconButton,
   Box,
   useTheme,
-  Button,
 } from "@mui/material";
 import { Add } from "iconsax-react";
-import AddIcon from "@mui/icons-material/Add";
 import { CartContext } from "../../contexts/CartContext";
-import { LuTrash } from "react-icons/lu";
 import { MdOutlineRemove } from "react-icons/md";
-const ProductCard = (props: Iproduct.Product) => {
+interface IproductCard extends Iproduct.Product {
+  width: string;
+}
+const ProductCard = (props: IproductCard) => {
   const theme = useTheme();
   const { addToCart } = useContext(CartContext)!;
-  const { cart, increaseQuantity, decreaseQuantity, clearCart } =
-    useContext(CartContext)!;
+  const { cart, decreaseQuantity } = useContext(CartContext)!;
   console.log("cart", cart);
   const isProductIdIncluded = cart.find(
     (products) => products._id === props._id
   );
+  const numOfProduct = cart.find(
+    (item) => item._id === props._id
+  )?.cartQuantity;
   console.log("isProductIdIncluded", isProductIdIncluded);
   return (
     <Box
       sx={{
         borderRadius: 3,
         // padding: "10px",
-        width: "190px",
-        background: theme.palette.background.paper,
+        width: props.width,
+        // background: theme.palette.background.paper,
       }}
     >
       <Box position="relative">
@@ -47,7 +49,7 @@ const ProductCard = (props: Iproduct.Product) => {
             display: "flex",
             bottom: 0,
             right: 10,
-            background: theme.palette.background.default,
+            // background: theme.palette.background.default,
           }}
         >
           {/* cart[+props._id]?.cartQuantity === 1 */}
@@ -55,18 +57,30 @@ const ProductCard = (props: Iproduct.Product) => {
             sx={{
               display: "flex",
               position: "absolute",
-              bottom: 0,
+              bottom: 3,
               right: 2,
               alignItems: "center",
+              background: theme.palette.background.default,
+              borderRadius: 5,
+              pr: numOfProduct && numOfProduct > 0 ? 0.5 : 0,
             }}
           >
-            <>
+            <Box
+              sx={{
+                display: numOfProduct && numOfProduct > 0 ? "flex" : "none",
+                alignItems: "center",
+                py: 0.5,
+                px: 0.5,
+                borderRadius: 5,
+                background: theme.palette.background.default,
+              }}
+            >
               <IconButton
-                style={{
+                sx={{
                   // position: "absolute",
                   // bottom: 0,
                   // right: 10,
-                  backgroundColor: "white",
+                  background: theme.palette.grey["300"],
                   // borderRadius: "50%",
                   // padding: "5px",
                 }}
@@ -77,18 +91,18 @@ const ProductCard = (props: Iproduct.Product) => {
                   decreaseQuantity(props._id);
                 }}
               >
-                <MdOutlineRemove size="18" color={"black"} />
+                <MdOutlineRemove size="19" color={"black"} />
               </IconButton>
-              <Typography>
+              <Typography sx={{ px: 1 }}>
                 {cart.find((item) => item._id === props._id)?.cartQuantity || 0}
               </Typography>
-            </>
-
+            </Box>
             <IconButton
-              style={{
-                backgroundColor: "white",
+              sx={{
+                background: theme.palette.grey["300"],
                 borderRadius: "50%",
-                padding: "5px",
+                py: 0.5,
+                px: 0.5,
               }}
               color="primary"
               aria-label="add to cart"

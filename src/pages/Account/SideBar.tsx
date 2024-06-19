@@ -182,12 +182,18 @@ const Sidebar = () => {
             <ArrowForwardIosIcon />
           </ListItem>
           <Divider sx={{ background: theme.palette.grey["50"] }} />
-          <ListItem button onClick={switchColorMode}>
+          <ListItem>
             <ListItemIcon>
               <Brightness2Icon />
             </ListItemIcon>
             <ListItemText primary={t("Dark Mode")} />
-            <Switch edge="end" />
+            <Switch
+              edge="end"
+              onClick={(e) => {
+                e.stopPropagation();
+                switchColorMode();
+              }}
+            />
           </ListItem>
           <Divider sx={{ background: theme.palette.grey["50"] }} />
 

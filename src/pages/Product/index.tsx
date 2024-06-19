@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ROUTE_PATH } from "../../utils/route-util";
@@ -15,8 +15,8 @@ import { CartContext } from "../../contexts/CartContext";
 function Product() {
   const navigate = useNavigate();
   const { setCategories } = useAuthContext();
-  const { cart, getTotalPrice, clearCart } = useContext(CartContext)!;
-
+  const { cart } = useContext(CartContext)!;
+  const [produtDetail, setProdudctDetail] = useState<Iproduct.Product>();
   // const [listCate, setCate] = useState<Iproduct.Category[]>([]);
   // const [search, setSearch] = useState("");
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -148,6 +148,7 @@ function Product() {
                       onClick={() => {
                         // navigate(ROUTE_PATH.productDetail.replace(":id", "1"));
                         setDrawerOpen(true);
+                        setProdudctDetail(product);
                       }}
                       sx={{ mr: 1 }}
                     >
@@ -164,6 +165,7 @@ function Product() {
                         createdAt={product.createdAt}
                         updatedAt={product.updatedAt}
                         __v={product.__v}
+                        width="190px"
                       />
                     </Box>
                   );
@@ -237,6 +239,8 @@ function Product() {
                       onClick={() => {
                         // navigate(ROUTE_PATH.productDetail.replace(":id", "1"));
                         setDrawerOpen(true);
+                        console.log("productDetail", product);
+                        setProdudctDetail(product);
                       }}
                       sx={{ mr: 1 }}
                     >
@@ -253,6 +257,7 @@ function Product() {
                         createdAt={product.createdAt}
                         updatedAt={product.updatedAt}
                         __v={product.__v}
+                        width="190px"
                       />
                     </Box>
                   );
@@ -262,7 +267,11 @@ function Product() {
           )}
         </>
       )}
-      <ProductDrawer drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
+      <ProductDrawer
+        drawerOpen={drawerOpen}
+        setDrawerOpen={setDrawerOpen}
+        productDetail={produtDetail}
+      />
     </Box>
   );
 }

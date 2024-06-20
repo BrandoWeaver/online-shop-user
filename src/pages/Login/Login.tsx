@@ -145,7 +145,7 @@ const Login = () => {
                 size="medium"
                 margin="dense"
                 required
-                autoFocus
+                // autoFocus
                 error={Boolean(error)}
                 {...field}
               />

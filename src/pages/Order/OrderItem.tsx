@@ -10,6 +10,8 @@ import {
   useTheme,
 } from "@mui/material";
 import { styled } from "@mui/system";
+import { ROUTE_PATH } from "../../utils/route-util";
+import { useNavigate } from "react-router-dom";
 export interface OrderItemProps {
   notes: string;
   status: string;
@@ -53,6 +55,7 @@ const OrderItem: React.FC<OrderItemProps> = ({
   orderId,
 }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
   return (
     <Paper elevation={3} sx={{ borderRadius: 2, p: 2, mb: 2 }}>
       <Box
@@ -153,7 +156,7 @@ const OrderItem: React.FC<OrderItemProps> = ({
           color="primary"
           sx={{ textTransform: "none" }}
           onClick={() => {
-            // navigate(ROUTE_PATH.cart);
+            navigate(ROUTE_PATH.orderDetail + `?orderId=${orderId}`);
             console.log("exist", items);
           }}
         >

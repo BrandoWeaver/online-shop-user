@@ -43,5 +43,11 @@ const ORDER_API = {
     });
     return res.data;
   },
+  orderDetail: async (orderId: string) => {
+    const res = await HttpUtil.get<Order.IorderDetail>(
+      ROUTE_API.orderDetail.replace(":id", orderId)
+    );
+    return res.data;
+  },
 };
 export { ORDER_API };

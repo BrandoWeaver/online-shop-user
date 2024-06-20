@@ -14,6 +14,7 @@ export const ROUTE_PATH = {
   about_us: "/about_us",
   term: "/term",
   checkout: "/checkout",
+  orderDetail: "/order-detail",
 };
 export const ROUTE_API = {
   root: process.env.REACT_APP_API_URL,
@@ -29,4 +30,5 @@ export const ROUTE_API = {
   userOrdered: "/api/orders/user/:userId",
   createOrder: "/api/orders",
   cancelOrder: "/api/orders/:orderId",
+  orderDetail: "/api/orders/:id",
 };

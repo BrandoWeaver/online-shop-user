@@ -24,6 +24,8 @@ function Order() {
     onSuccess: (data) => {
       console.log("dataOrdered", data);
     },
+    cacheKey: `listOrder-${orderId}`,
+    staleTime: -1,
   });
   const { run: runCancelOrder, loading: loadingCancelOrder } = useRequest(
     (orderId: string) => ORDER_API.cancelOrder(orderId),

@@ -17,6 +17,7 @@ const PopularProduct = lazy(() => import("../pages/PopularProduct/index"));
 const Aboutus = lazy(() => import("../pages/AboutUs/index"));
 const Term = lazy(() => import("../pages/TermOfUse/index"));
 const Checkout = lazy(() => import("../pages/Checkout/index"));
+const OrderDetail = lazy(() => import("../pages/OrderDetail/index"));
 const router = createBrowserRouter(
   [
     {
@@ -80,6 +81,14 @@ const router = createBrowserRouter(
       element: (
         <Suspense>
           <CategoryList />
+        </Suspense>
+      ),
+    },
+    {
+      path: ROUTE_PATH.orderDetail,
+      element: (
+        <Suspense>
+          <OrderDetail />
         </Suspense>
       ),
     },

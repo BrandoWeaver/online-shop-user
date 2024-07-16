@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Box, Skeleton, Typography, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ROUTE_PATH } from "../../utils/route-util";
@@ -11,7 +11,9 @@ import ProductCard from "./productCard";
 import SectionHeader from "./SectionHeader";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { CartContext } from "../../contexts/CartContext";
+import ErrDialog, { IErrDialogRef } from "../../components/Dialog/ErrorDialog";
 function Product() {
+  const errRef = useRef<IErrDialogRef>(null);
   const navigate = useNavigate();
   const { setCategories } = useAuthContext();
   const [callData, setCallNewData] = useState(1);
@@ -29,6 +31,7 @@ function Product() {
     },
     onError: (err) => {
       console.log("errRes", err);
+      errRef.current?.open("Error Occured");
     },
     cacheKey: `listProduct-${callData}`,
     staleTime: -1,
@@ -48,6 +51,7 @@ function Product() {
       },
       onError: (err) => {
         console.log("errRes", err);
+        errRef.current?.open("Error Occured");
       },
       cacheKey: `listCategories-${callData}`,
       staleTime: -1,
@@ -64,6 +68,7 @@ function Product() {
       },
       onError: (err) => {
         console.log("errRes", err);
+        errRef.current?.open("Error Occured");
       },
       cacheKey: `listpopularProduct-${callData}`,
       staleTime: -1,
@@ -81,6 +86,7 @@ function Product() {
         background: theme.palette.background.default,
       }}
     >
+      <ErrDialog ref={errRef} />
       <CategoryGrid
         allCategories={allCategories?.categories}
         loadingCategories={loadingCategories}

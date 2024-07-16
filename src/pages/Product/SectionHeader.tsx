@@ -2,11 +2,13 @@ import React from "react";
 import { Box, Typography, IconButton } from "@mui/material";
 import FireIcon from "@mui/icons-material/Whatshot"; // Using the "Whatshot" icon as a fire icon
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { useTranslation } from "react-i18next";
 interface Isection {
   title: string;
   onClick: () => void;
 }
 const SectionHeader = (props: Isection) => {
+  const { t } = useTranslation();
   return (
     <Box
       display="flex"
@@ -19,7 +21,7 @@ const SectionHeader = (props: Isection) => {
           style={{ color: "green", fontSize: "24px", marginRight: "8px" }}
         />
         <Typography variant="h6" component="h2" style={{ fontWeight: "bold" }}>
-          {props.title}
+          {t(props.title)}
         </Typography>
       </Box>
       <IconButton
@@ -33,7 +35,7 @@ const SectionHeader = (props: Isection) => {
           variant="body1"
           style={{ color: "blue", fontWeight: "bold", marginRight: "4px" }}
         >
-          See More
+          {t("See More")}
         </Typography>
         <ArrowForwardIosIcon fontSize="small" style={{ color: "blue" }} />
       </IconButton>

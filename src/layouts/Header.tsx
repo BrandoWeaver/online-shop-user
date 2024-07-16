@@ -12,10 +12,12 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import { ROUTE_PATH } from "../utils/route-util";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <AppBar
       position="static"
@@ -43,8 +45,9 @@ const Header = () => {
                 color="textPrimary"
                 style={{ marginLeft: 8 }}
               >
-                <span style={{ color: "gray" }}>DELIVER TO...</span> <br />
-                <strong>Current Location</strong>
+                <span style={{ color: "gray" }}>{t("DELIVER TO...")}</span>{" "}
+                <br />
+                <strong>{t("Current Location")}</strong>
               </Typography>
             </Grid>
           </Grid>

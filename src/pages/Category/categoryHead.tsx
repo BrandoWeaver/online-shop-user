@@ -12,6 +12,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import { ROUTE_PATH } from "../../utils/route-util";
+import { useTranslation } from "react-i18next";
 
 interface Icate {
   allCategories: Icart.Category[] | undefined;
@@ -27,7 +28,7 @@ function CateHead(props: Icate) {
     props.setId(newValue); // Update the category_id on tab change
   };
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
   return (
     <div>
       <AppBar sx={{ bgcolor: theme.palette.background.default }}>
@@ -47,7 +48,7 @@ function CateHead(props: Icate) {
             style={{ flexGrow: 1, textAlign: "center" }}
             color={theme.palette.grey["700"]}
           >
-            All Categories
+            {t("All Categories")}
           </Typography>
           <IconButton
             edge="end"

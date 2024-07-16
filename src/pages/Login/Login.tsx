@@ -19,6 +19,8 @@ import { Link, Navigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { LoadingSpiner } from "../../components/Loading";
 import theme from "../../themes";
+import { useRef } from "react";
+import ErrDialog, { IErrDialogRef } from "../../components/Dialog/ErrorDialog";
 
 interface Iform {
   name: string;
@@ -26,6 +28,7 @@ interface Iform {
   rememberMe: boolean;
 }
 const Login = () => {
+  const errRef = useRef<IErrDialogRef>(null);
   const { control, handleSubmit, watch } = useForm<Iform>();
   const { setAuthState } = useAuthContext();
   // const theme = useTheme();
@@ -50,19 +53,11 @@ const Login = () => {
     },
     onError: (err) => {
       console.log("errRes", err);
+      errRef.current?.open("Error Occured");
     },
   });
   const onSubmit: SubmitHandler<Iform> = async (data) => {
     await runLogin({ username: data.name, password: data.password });
-    // try {
-    //   await axios.post("http://localhost:3000/api/auth/login", {
-    //     username: data.name,
-    //     password: data.password,
-    //   });
-    //   console.log("Login successful!");
-    // } catch (error) {
-    //   console.error("Login failed:", error);
-    // }
   };
   if (login?.token) return <Navigate to={ROUTE_PATH.product} replace />;
   return (
@@ -73,6 +68,7 @@ const Login = () => {
         alignItems: "center",
       }}
     >
+      <ErrDialog ref={errRef} />
       <Box
         component="form"
         noValidate

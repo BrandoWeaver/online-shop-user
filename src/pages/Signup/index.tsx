@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Box, Button, Typography } from "@mui/material";
 import {
@@ -11,6 +11,7 @@ import { Auth } from "../../api/Auth";
 import { useNavigate } from "react-router-dom";
 import { ROUTE_PATH } from "../../utils/route-util";
 import theme from "../../themes";
+import ErrDialog, { IErrDialogRef } from "../../components/Dialog/ErrorDialog";
 
 interface IForm {
   username: string;
@@ -23,6 +24,7 @@ interface IForm {
 
 const SignupForm = () => {
   const { control, handleSubmit } = useForm<IForm>();
+  const errRef = useRef<IErrDialogRef>(null);
   const navigate = useNavigate();
   const { runAsync: runSignup } = useRequest(Auth.register, {
     manual: true,
@@ -32,6 +34,7 @@ const SignupForm = () => {
     },
     onError: (err) => {
       console.log("errRes", err);
+      errRef.current?.open("Error Occured");
     },
   });
   const onSubmit: SubmitHandler<IForm> = async (data) => {
@@ -47,6 +50,7 @@ const SignupForm = () => {
         alignItems: "center",
       }}
     >
+      <ErrDialog ref={errRef} />
       <Box
         component="form"
         noValidate

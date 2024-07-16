@@ -15,6 +15,7 @@ import React, { useEffect, useState } from "react";
 
 import { matchPath, useLocation, useNavigate } from "react-router-dom";
 import { ROUTE_PATH } from "../utils/route-util";
+import { useTranslation } from "react-i18next";
 export const BottomList = [
   {
     id: 0,
@@ -49,6 +50,7 @@ export const BottomList = [
 ];
 export default function BottomBar() {
   // const theme = useTheme();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [value, setValue] = useState(0);
   const location = useLocation();
@@ -95,7 +97,7 @@ export default function BottomBar() {
             return (
               <BottomNavigationAction
                 key={i.label}
-                label={i.label}
+                label={t(i.label)}
                 icon={i.icon}
                 sx={{
                   minWidth: 0,

@@ -1,3 +1,5 @@
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+
 import {
   Button,
   Dialog,
@@ -5,30 +7,50 @@ import {
   DialogContent,
   DialogTitle,
   Typography,
-} from '@mui/material';
+} from "@mui/material";
 
-interface IErrorDialog {
-  open: boolean;
-  errorTitle?: string;
-  errorMessage: string;
-  onCloseDialog: () => void;
+interface IErrDialog {
+  title?: string;
 }
 
-const ErrorDialog = (props: IErrorDialog) => {
-  const { open, errorTitle, errorMessage, onCloseDialog } = props;
-  return (
-    <Dialog open={open} onClose={onCloseDialog} fullWidth maxWidth='xs'>
-      <DialogTitle>{errorTitle || 'Something went wrong'}</DialogTitle>
-      <DialogContent>
-        <Typography>{errorMessage}</Typography>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onCloseDialog}>
-          <Typography>OK</Typography>
-        </Button>
-      </DialogActions>
-    </Dialog>
-  );
-};
+export interface IErrDialogRef {
+  open: (message: string | Error) => void;
+  close: () => void;
+}
 
-export default ErrorDialog;
+const ErrDialog = forwardRef<IErrDialogRef, IErrDialog>(
+  ({ title = "Something Wrong" }, ref) => {
+    const messageRef = useRef("");
+
+    const [open, setOpen] = useState(false);
+    const onClose = () => setOpen(false);
+
+    useImperativeHandle(
+      ref,
+      () => ({
+        open: (message) => {
+          messageRef.current =
+            typeof message === "string" ? message : message.message;
+          setOpen(true);
+        },
+        close: onClose,
+      }),
+      []
+    );
+    return (
+      <Dialog open={open} onClose={onClose} fullWidth maxWidth="xs">
+        <DialogTitle>{title}</DialogTitle>
+        <DialogContent>
+          <Typography>{messageRef.current}</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onClose}>
+            <Typography>OK</Typography>
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
+  }
+);
+
+export default ErrDialog;

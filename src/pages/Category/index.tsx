@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import CateHead from "./categoryHead";
 import { useRequest } from "ahooks";
 import { PRODUCT_API } from "../../api/Product";
@@ -10,8 +10,12 @@ import CheckoutButton from "../Cart/CheckoutButton";
 import { CartContext } from "../../contexts/CartContext";
 import { ROUTE_PATH } from "../../utils/route-util";
 import ProductDrawer from "../Product/ProductDrawer";
+import ErrorDialog, {
+  IErrDialogRef,
+} from "../../components/Dialog/ErrorDialog";
 
 function CategoryList() {
+  const errRef = useRef<IErrDialogRef>(null);
   const currentId = useParams();
   const [produtDetail, setProdudctDetail] = useState<Iproduct.Product>();
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -27,6 +31,7 @@ function CategoryList() {
       },
       onError: (err) => {
         console.log("errRes", err);
+        errRef.current?.open("Error Occured");
       },
     }
   );
@@ -38,6 +43,7 @@ function CategoryList() {
       },
       onError: (err) => {
         console.log("errRes", err);
+        errRef.current?.open("Error Occured");
       },
       refreshDeps: [cateId],
     }
@@ -45,6 +51,7 @@ function CategoryList() {
 
   return (
     <Box>
+      <ErrorDialog ref={errRef} />
       <ProductDrawer
         drawerOpen={drawerOpen}
         setDrawerOpen={setDrawerOpen}

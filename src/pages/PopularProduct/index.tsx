@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import {
   Toolbar,
   IconButton,
@@ -20,11 +20,15 @@ import ErrorResponse from "../../components/ErrorResponse";
 import ProductDrawer from "../Product/ProductDrawer";
 import CheckoutButton from "../Cart/CheckoutButton";
 import { CartContext } from "../../contexts/CartContext";
+import { useTranslation } from "react-i18next";
+import ErrDialog, { IErrDialogRef } from "../../components/Dialog/ErrorDialog";
 
 function PopularProduct() {
   const navigate = useNavigate();
+  const errRef = useRef<IErrDialogRef>(null);
   const { cart, getTotalPrice, getProductIds } = useContext(CartContext)!;
   const theme = useTheme();
+  const { t } = useTranslation();
   const [produtDetail, setProdudctDetail] = useState<Iproduct.Product>();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const {
@@ -38,10 +42,12 @@ function PopularProduct() {
     },
     onError: (err) => {
       console.log("errRes", err);
+      errRef.current?.open("Error Occured");
     },
   });
   return (
     <div>
+      <ErrDialog ref={errRef} />
       <Toolbar>
         <IconButton
           edge="start"
@@ -58,7 +64,7 @@ function PopularProduct() {
           style={{ flexGrow: 1, textAlign: "center" }}
           color={theme.palette.grey["700"]}
         >
-          Popular Products
+          {t("Popular Products")}
         </Typography>
         <IconButton
           edge="end"

@@ -74,12 +74,7 @@ const AboutUs = () => {
             <LanguageIcon />
           </Grid>
           <Grid item>
-            <Link
-              href="http://moreplus.com.kh"
-              target="_blank"
-              rel="noopener"
-              color="inherit"
-            >
+            <Link href="#" target="_blank" rel="noopener" color="inherit">
               www.onlineshop.com.kh
             </Link>
           </Grid>

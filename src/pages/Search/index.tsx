@@ -7,7 +7,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SearchIcon from "@mui/icons-material/Search";
 import { useRequest } from "ahooks";
@@ -17,6 +17,8 @@ import { LoadingSpiner } from "../../components/Loading";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { ROUTE_PATH } from "../../utils/route-util";
+import { useTranslation } from "react-i18next";
+import ErrDialog, { IErrDialogRef } from "../../components/Dialog/ErrorDialog";
 
 // const categories = [
 //   "Vegetables",
@@ -29,9 +31,11 @@ import { ROUTE_PATH } from "../../utils/route-util";
 // ];
 
 function Search() {
+  const errRef = useRef<IErrDialogRef>(null);
   const theme = useTheme();
   const navigate = useNavigate();
   const { categories } = useAuthContext();
+  const { t } = useTranslation();
   const [searchProduct, setSearchProduct] = useState("");
   const { loading: loadingList, data: allProduct } = useRequest(
     () => PRODUCT_API.listProduct(undefined, searchProduct),
@@ -41,6 +45,7 @@ function Search() {
       },
       onError: (err) => {
         console.log("errRes", err);
+        errRef.current?.open("Error Occured");
       },
       ready: searchProduct !== "",
       refreshDeps: [searchProduct],
@@ -49,6 +54,8 @@ function Search() {
 
   return (
     <Box sx={{ background: theme.palette.background.paper }}>
+      <ErrDialog ref={errRef} />
+
       <Box
       // sx={{
       //   background: theme.palette.background.paper,
@@ -90,7 +97,7 @@ function Search() {
                 ml: 1,
                 flex: 1,
               }}
-              placeholder="Search"
+              placeholder={t("Search")}
               onChange={(e) => setSearchProduct(e.target.value)}
             />
           </Paper>
@@ -98,7 +105,7 @@ function Search() {
         {searchProduct === "" ? (
           <>
             <Typography variant="body1" pl={2} fontWeight={"bold"}>
-              Popular Categories
+              {t("Popular Categories")}
             </Typography>
             <Grid container spacing={2} mt={1} px={2}>
               {categories.map((category, index) => (

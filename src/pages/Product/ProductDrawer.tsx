@@ -73,7 +73,10 @@ function ProductDrawer(props: Iproduct) {
             />
           </Box>
           <Typography variant="body1" mt={2}>
-            In-Stock: <span style={{ color: "blue" }}>100+</span>
+            In-Stock:{" "}
+            <span style={{ color: "blue" }}>
+              {props.productDetail?.quantity}
+            </span>
           </Typography>
           {/* <Typography variant="h4" mt={1}>
             $0.60

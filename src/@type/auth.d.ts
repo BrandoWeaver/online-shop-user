@@ -10,6 +10,7 @@ declare namespace Login {
     username: string;
     email: string;
     phone: string;
+    usertype: string;
   }
 
   export interface IRegister {

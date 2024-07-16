@@ -29,11 +29,11 @@ const containerStyle = {
 };
 
 const orderSummary = {
-  subtotal: 4.75,
-  packagingFee: 0.13,
-  discount: -2.23,
-  deliveryFee: 0.57,
-  total: 3.22,
+  subtotal: 0.0,
+  packagingFee: 0.0,
+  discount: 0.0,
+  deliveryFee: 0.0,
+  total: 0.0,
 };
 interface IcheckoutContent {}
 function CheckoutContent(props: IcheckoutContent) {

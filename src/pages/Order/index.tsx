@@ -20,15 +20,14 @@ function Order() {
     data: listUserOrdered,
     refresh: refreshOrder,
     loading: loadingLiseOrdered,
-  } = useRequest(() => ORDER_API.getListUserOrder(authState.userId || ""), {
+  } = useRequest(() => ORDER_API.getListUserOrder(authState?.userId || ""), {
     onSuccess: (data) => {
       console.log("dataOrdered", data);
     },
-    onError: (err) => {
-      openRef.current?.open();
-    },
+
     // cacheKey: `listOrder-${orderId}`,
     // staleTime: -1,
+    refreshDeps: [authState?.userId],
   });
   const { run: runCancelOrder, loading: loadingCancelOrder } = useRequest(
     (orderId: string) => ORDER_API.cancelOrder(orderId),
@@ -104,7 +103,8 @@ function Order() {
           <LoadingSpiner size={25} />{" "}
         </Box>
       ) : listUserOrdered?.length !== 0 ? (
-        listUserOrdered?.map((i, index) => {
+        listUserOrdered &&
+        listUserOrdered.map((i, index) => {
           return (
             <Box key={i._id} sx={{ px: 2, mt: 2, mb: index ? 10 : 0 }}>
               <OrderItem

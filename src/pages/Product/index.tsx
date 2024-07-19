@@ -72,8 +72,7 @@ function Product() {
         console.log("errRes", err);
         errRef.current?.open("Error Occured");
       },
-      cacheKey: `listpopularProduct-${callData}`,
-      staleTime: -1,
+      cacheKey: `listBanner-${callData}`,
     });
   const {
     data: listshopBanner,
@@ -87,6 +86,8 @@ function Product() {
       console.log("listshopBanner", err);
       errRef.current?.open("Error Occured");
     },
+    cacheKey: `listpopularProduct-${callData}`,
+    staleTime: -1,
   });
   return (
     <Box

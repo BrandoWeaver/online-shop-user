@@ -101,7 +101,7 @@ const OrderItem: React.FC<OrderItemProps> = ({
             >
               <StyledBadge badgeContent={`x${item.quantity}`} color="primary">
                 <Avatar
-                  src={item.product.image || ""}
+                  src={item.product?.image || ""}
                   variant="rounded"
                   sx={{ width: 70, height: 70 }}
                 />

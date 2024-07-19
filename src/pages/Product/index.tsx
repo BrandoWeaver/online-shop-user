@@ -101,7 +101,7 @@ function Product() {
       }}
     >
       <ErrDialog ref={errRef} />
-      <Box sx={{ py: 1, px: 2 }}>
+      <Box sx={{ pt: 1, px: 2 }}>
         {loadingshopBanner ? (
           <Skeleton
             variant="rectangular"

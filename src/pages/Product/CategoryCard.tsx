@@ -21,7 +21,7 @@ const CategoryGrid = (props: CategoryCard) => {
       ) : (
         <Paper
           // elevation={1}
-          sx={{ py: 2, m: 2, borderRadius: 2 }}
+          sx={{ py: 2, mx: 2, mt: 1, borderRadius: 2 }}
           variant="outlined"
         >
           <Grid container columns={{ xs: 4, sm: 8, md: 12 }}>

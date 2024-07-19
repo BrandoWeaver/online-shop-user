@@ -93,35 +93,36 @@ const OrderItem: React.FC<OrderItemProps> = ({
         </Typography>
       </Box>
       <Box sx={{ display: "flex", mt: 2, overflowX: "auto" }}>
-        {items.map((item, index) => (
-          <Box
-            key={index}
-            sx={{ position: "relative", display: "inline-flex", mr: 1 }}
-          >
-            <StyledBadge badgeContent={`x${item.quantity}`} color="primary">
-              <Avatar
-                src={item.product.image || ""}
-                variant="rounded"
-                sx={{ width: 70, height: 70 }}
-              />
-            </StyledBadge>
+        {items &&
+          items.map((item, index) => (
             <Box
-              sx={{
-                position: "absolute",
-                bottom: 2,
-                right: 2,
-                background: theme.palette.background.default,
-                borderRadius: 1,
-                px: 0.5,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
+              key={index}
+              sx={{ position: "relative", display: "inline-flex", mr: 1 }}
             >
-              <Typography>X{item.quantity}</Typography>
+              <StyledBadge badgeContent={`x${item.quantity}`} color="primary">
+                <Avatar
+                  src={item.product?.image || ""}
+                  variant="rounded"
+                  sx={{ width: 70, height: 70 }}
+                />
+              </StyledBadge>
+              <Box
+                sx={{
+                  position: "absolute",
+                  bottom: 2,
+                  right: 2,
+                  background: theme.palette.background.default,
+                  borderRadius: 1,
+                  px: 0.5,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Typography>X{item.quantity}</Typography>
+              </Box>
             </Box>
-          </Box>
-        ))}
+          ))}
       </Box>
       <Divider sx={{ mt: 2 }} />
       <Typography>Note: {notes}</Typography>

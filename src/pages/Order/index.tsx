@@ -24,6 +24,9 @@ function Order() {
     onSuccess: (data) => {
       console.log("dataOrdered", data);
     },
+    onError: (err) => {
+      openRef.current?.open();
+    },
     // cacheKey: `listOrder-${orderId}`,
     // staleTime: -1,
   });
@@ -42,9 +45,9 @@ function Order() {
       openRef.current?.open();
     }
   }, [orderId]);
-  if (!authState?.isLogIn) {
-    return <Navigate to={ROUTE_PATH.login} replace />;
-  }
+  // if (!authState?.isLogIn) {
+  //   return <Navigate to={ROUTE_PATH.login} replace />;
+  // }
   return (
     <div>
       <CusDialog

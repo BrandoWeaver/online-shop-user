@@ -12,6 +12,8 @@ import SectionHeader from "./SectionHeader";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { CartContext } from "../../contexts/CartContext";
 import ErrDialog, { IErrDialogRef } from "../../components/Dialog/ErrorDialog";
+import ShopSlider from "./ShopBanner";
+import { ShopBanner } from "../../api/ShopBanner";
 function Product() {
   const errRef = useRef<IErrDialogRef>(null);
   const navigate = useNavigate();
@@ -73,7 +75,19 @@ function Product() {
       cacheKey: `listpopularProduct-${callData}`,
       staleTime: -1,
     });
-
+  const {
+    data: listshopBanner,
+    loading: loadingshopBanner,
+    error: errorshopBanner,
+  } = useRequest(ShopBanner.shopBanner, {
+    onSuccess: (data) => {
+      console.log("listshopBanner", data);
+    },
+    onError: (err) => {
+      console.log("listshopBanner", err);
+      errRef.current?.open("Error Occured");
+    },
+  });
   return (
     <Box
       sx={{
@@ -87,6 +101,17 @@ function Product() {
       }}
     >
       <ErrDialog ref={errRef} />
+      <Box sx={{ py: 1, px: 2 }}>
+        {loadingshopBanner ? (
+          <Skeleton
+            variant="rectangular"
+            height={152}
+            sx={{ borderRadius: 2 }}
+          />
+        ) : (
+          <ShopSlider listshopBanner={listshopBanner} />
+        )}
+      </Box>
       <CategoryGrid
         allCategories={allCategories?.categories}
         loadingCategories={loadingCategories}

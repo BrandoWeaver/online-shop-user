@@ -22,6 +22,7 @@ import CheckoutButton from "../Cart/CheckoutButton";
 import { CartContext } from "../../contexts/CartContext";
 import { useTranslation } from "react-i18next";
 import ErrDialog, { IErrDialogRef } from "../../components/Dialog/ErrorDialog";
+import { ShopBanner } from "../../api/ShopBanner";
 
 function PopularProduct() {
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ function PopularProduct() {
       errRef.current?.open("Error Occured");
     },
   });
+
   return (
     <div>
       <ErrDialog ref={errRef} />

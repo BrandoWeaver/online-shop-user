@@ -31,4 +31,5 @@ export const ROUTE_API = {
   createOrder: "/api/orders",
   cancelOrder: "/api/orders/:orderId",
   orderDetail: "/api/orders/:id",
+  shopBanner: "/api/shop-banners",
 };

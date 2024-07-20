@@ -52,12 +52,13 @@ const PWAInstallHeader = () => {
               Online Shop
             </Typography>
             <Typography variant="subtitle1" color="textSecondary" noWrap>
-              Your Daily Shop App
+              Daily Shop App
             </Typography>
           </Box>
           <Box>
             <Button
               variant="contained"
+              sx={{ textTransform: "none" }}
               color="primary"
               onClick={handleInstallClick}
             >

@@ -12,7 +12,7 @@ import "./App.css";
 import i18n from "./i18n";
 import { createContext, useMemo, useState } from "react";
 import CartProvider from "./contexts/CartContext";
-
+import PWAInstallHeader from "./components/SWP/PWAInstallHeader";
 type ThemeContextType = {
   switchColorMode: () => void;
 };
@@ -36,20 +36,22 @@ function App() {
     [mode]
   );
   return (
-    <CartProvider>
-      <StyledEngineProvider injectFirst>
-        <ThemeContext.Provider value={{ switchColorMode }}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <AuthWrapper>
-              <I18nextProvider i18n={i18n}>
-                <RouterProvider router={router} />
-              </I18nextProvider>
-            </AuthWrapper>
-          </ThemeProvider>
-        </ThemeContext.Provider>
-      </StyledEngineProvider>
-    </CartProvider>
+    <>
+      <CartProvider>
+        <StyledEngineProvider injectFirst>
+          <ThemeContext.Provider value={{ switchColorMode }}>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <AuthWrapper>
+                <I18nextProvider i18n={i18n}>
+                  <RouterProvider router={router} />
+                </I18nextProvider>
+              </AuthWrapper>
+            </ThemeProvider>
+          </ThemeContext.Provider>
+        </StyledEngineProvider>
+      </CartProvider>
+    </>
   );
 }
 export default App;

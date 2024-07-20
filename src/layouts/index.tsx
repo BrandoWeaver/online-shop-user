@@ -9,6 +9,7 @@ import Menubar from "./Menubar";
 import Navbar from "./Navbar";
 import BottomBar from "./BottomBar";
 import { useTheme } from "@mui/material";
+import PWAInstallHeader from "../components/SWP/PWAInstallHeader";
 
 const drawerWidth = 300;
 function Layout() {

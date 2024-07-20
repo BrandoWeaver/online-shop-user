@@ -1,5 +1,4 @@
-// src/components/PWAInstallHeader.tsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -10,17 +9,60 @@ import {
   Box,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import usePWAInstallPrompt from "../../hooks/usePWAInstallPrompt";
 
 const PWAInstallHeader = () => {
-  const { isPromptVisible, handleInstallClick, Onclose } =
-    usePWAInstallPrompt();
+  const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null);
+  const [isPromptVisible, setIsPromptVisible] = useState(false);
+  const [isPWAInstallSupported, setIsPWAInstallSupported] = useState(false);
+
+  useEffect(() => {
+    if ("BeforeInstallPromptEvent" in window) {
+      setIsPWAInstallSupported(true);
+
+      const handler = (e: Event) => {
+        e.preventDefault();
+        setDeferredPrompt(e);
+        setIsPromptVisible(true);
+      };
+
+      window.addEventListener("beforeinstallprompt", handler);
+
+      return () => {
+        window.removeEventListener("beforeinstallprompt", handler);
+      };
+    } else {
+      setIsPWAInstallSupported(false);
+    }
+  }, []);
+
+  const handleInstallClick = () => {
+    if (deferredPrompt) {
+      (deferredPrompt as any).prompt();
+      (deferredPrompt as any).userChoice.then(
+        (choiceResult: { outcome: string }) => {
+          if (choiceResult.outcome === "accepted") {
+            console.log("User accepted the install prompt");
+          } else {
+            console.log("User dismissed the install prompt");
+          }
+          setDeferredPrompt(null);
+          setIsPromptVisible(false);
+        }
+      );
+    }
+  };
+
+  const Onclose = () => {
+    setIsPromptVisible(false);
+  };
 
   return (
     <AppBar
       position="static"
       color="default"
-      sx={{ display: isPromptVisible ? "block" : "none" }}
+      sx={{
+        display: isPromptVisible || !isPWAInstallSupported ? "block" : "none",
+      }}
     >
       <Toolbar>
         <IconButton
@@ -56,14 +98,26 @@ const PWAInstallHeader = () => {
             </Typography>
           </Box>
           <Box>
-            <Button
-              variant="contained"
-              sx={{ textTransform: "none" }}
-              color="primary"
-              onClick={handleInstallClick}
-            >
-              Install App
-            </Button>
+            {isPWAInstallSupported ? (
+              isPromptVisible ? (
+                <Button
+                  variant="contained"
+                  sx={{ textTransform: "none" }}
+                  color="primary"
+                  onClick={handleInstallClick}
+                >
+                  Install App
+                </Button>
+              ) : (
+                <Typography variant="body1" color="textSecondary">
+                  Add this app to your home screen for a better experience.
+                </Typography>
+              )
+            ) : (
+              <Typography variant="body1" color="textSecondary">
+                To install this app, please use Chrome or Edge.
+              </Typography>
+            )}
           </Box>
         </Box>
       </Toolbar>

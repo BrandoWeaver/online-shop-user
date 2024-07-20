@@ -35,10 +35,13 @@ const usePWAInstallPrompt = () => {
       );
     }
   };
-
+  const Onclose = () => {
+    setIsPromptVisible(false);
+  };
   return {
     isPromptVisible,
     handleInstallClick,
+    Onclose,
   };
 };
 

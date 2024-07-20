@@ -7,12 +7,14 @@ import {
   Button,
   IconButton,
   Avatar,
+  Box,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import usePWAInstallPrompt from "../../hooks/usePWAInstallPrompt";
 
 const PWAInstallHeader = () => {
-  const { isPromptVisible, handleInstallClick } = usePWAInstallPrompt();
+  const { isPromptVisible, handleInstallClick, Onclose } =
+    usePWAInstallPrompt();
 
   return (
     <AppBar
@@ -21,7 +23,14 @@ const PWAInstallHeader = () => {
       sx={{ display: isPromptVisible ? "block" : "none" }}
     >
       <Toolbar>
-        <IconButton edge="start" color="inherit" aria-label="close">
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="close"
+          onClick={() => {
+            Onclose();
+          }}
+        >
           <CloseIcon />
         </IconButton>
         <Avatar
@@ -29,21 +38,33 @@ const PWAInstallHeader = () => {
           alt="Online Shop"
           sx={{ marginRight: 2 }}
         />
-        <div style={{ flexGrow: 1 }}>
-          <Typography variant="h6" noWrap>
-            Online Shop
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary" noWrap>
-            Your Daily Shop App
-          </Typography>
-        </div>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleInstallClick}
+        <Box
+          sx={{
+            flexGrow: 1,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
         >
-          Install App
-        </Button>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Typography variant="h6" noWrap>
+              Online Shop
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary" noWrap>
+              Your Daily Shop App
+            </Typography>
+          </Box>
+          <Box>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleInstallClick}
+            >
+              Install App
+            </Button>
+          </Box>
+        </Box>
       </Toolbar>
     </AppBar>
   );

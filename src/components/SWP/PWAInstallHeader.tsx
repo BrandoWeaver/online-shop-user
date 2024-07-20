@@ -18,7 +18,7 @@ const PWAInstallHeader = () => {
     <AppBar
       position="static"
       color="default"
-      sx={{ display: isPromptVisible ? "none" : "block" }}
+      sx={{ display: isPromptVisible ? "block" : "none" }}
     >
       <Toolbar>
         <IconButton edge="start" color="inherit" aria-label="close">

@@ -76,7 +76,7 @@ function registerValidSW(swUrl: string, config?: Config) {
     })
     .catch((error) => {
       console.error("Error during service worker registration:", error);
-      alert("Service worker registration failed. Please try again later.");
+      //   alert("Service worker registration failed. Please try again later.");
     });
 }
 

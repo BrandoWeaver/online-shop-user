@@ -114,9 +114,14 @@ const PWAInstallHeader = () => {
                 </Typography>
               )
             ) : (
-              <Typography variant="body1" color="textSecondary">
-                To install this app, please use Chrome or Edge.
-              </Typography>
+              <Button
+                variant="contained"
+                sx={{ textTransform: "none" }}
+                color="primary"
+                onClick={handleInstallClick}
+              >
+                Install App
+              </Button>
             )}
           </Box>
         </Box>

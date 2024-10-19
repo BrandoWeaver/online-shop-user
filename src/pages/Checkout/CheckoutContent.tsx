@@ -65,6 +65,7 @@ function CheckoutContent(props: IcheckoutContent) {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
           console.log("navigator.geolocation", position);
+          console.log("position", position);
           setCurrentLocation({
             lat: position.coords.latitude,
             lng: position.coords.longitude,
@@ -159,7 +160,6 @@ function CheckoutContent(props: IcheckoutContent) {
             onChange={(e) =>
               setconfirmOrder((prevState) => ({
                 ...prevState,
-
                 name: e.target.value,
               }))
             }

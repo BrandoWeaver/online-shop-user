@@ -20,7 +20,7 @@ function Order() {
     data: listUserOrdered,
     refresh: refreshOrder,
     loading: loadingLiseOrdered,
-  } = useRequest(() => ORDER_API.getListUserOrder("669608f473a9fd5486460d1b"), {
+  } = useRequest(() => ORDER_API.getListUserOrder(`${authState.userId}`), {
     onSuccess: (data) => {
       console.log("dataOrdered", data);
     },

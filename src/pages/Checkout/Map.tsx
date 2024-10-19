@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Paper, Typography, useTheme } from "@mui/material";
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import RoomIcon from "@mui/icons-material/Room";
 
 interface DeliveryAddressProps {
@@ -15,10 +15,11 @@ const containerStyle = {
   height: "200px",
 };
 
-// const libraries: ("places" | "visualization" | "drawing" | "geometry")[] = [
-//   "places",
-//   "visualization",
-// ];
+const libraries: ("places" | "visualization" | "drawing" | "geometry")[] = [
+  "places",
+  "visualization",
+];
+
 const DeliveryAddress: React.FC<DeliveryAddressProps> = ({
   address,
   placeName,
@@ -26,21 +27,22 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({
   lng,
 }) => {
   const theme = useTheme();
-  //   const { isLoaded } = useJsApiLoader({
-  //     id: "google-map-script",
-  //     googleMapsApiKey: process.env.REACT_APP_MAP_KEY || "",
-  //     libraries,
-  //   });
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: process.env.REACT_APP_MAP_KEY || "",
+    libraries,
+  });
 
   const handleClick = () => {
     // Construct the URL with the latitude and longitude
-    const url = `https://www.google.com/maps/search/?api=1&query=${11.5408896},${104.8674304}`;
+    const url = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
 
     // Open the URL in a new tab
     window.open(url, "_blank");
   };
-  //   if (!isLoaded) return null;
-  //   console.log("name", address);
+
+  if (!isLoaded) return null;
+
   return (
     <Paper elevation={3} sx={{ borderRadius: 2, p: 2, mb: 2 }}>
       <Typography
@@ -63,7 +65,9 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({
           }}
           onClick={handleClick}
         >
-          <Marker position={{ lat, lng }} />
+          <Marker
+            position={{ lat: 11.51590276846192, lng: 105.03576374395581 }}
+          />
         </GoogleMap>
       </Box>
       <Box sx={{ display: "flex", alignItems: "center" }}>

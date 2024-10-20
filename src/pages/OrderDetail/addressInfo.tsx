@@ -9,7 +9,7 @@ const DeliveryAddress = (props: Props) => {
     <Box display="flex" alignItems="center">
       <HomeIcon color="primary" />
       <Typography variant="body1" ml={1}>
-        157 Oknha Tep Phan St. (182), Phnom Penh, Cambodia
+        {props.deliverAdd || "NA"}
       </Typography>
     </Box>
   );

@@ -13,6 +13,7 @@ import DeliveryAddress from "./addressInfo";
 import OrderSummary from "./OrderList";
 import FeeBreakdown from "./FreeBreak";
 import { Divider } from "@mui/material";
+import theme from "../../themes";
 
 const drawerBleeding = 56;
 
@@ -93,9 +94,39 @@ export default function SwipeableEdgeDrawer(props: Props) {
           }}
         >
           <Puller />
-          <Typography sx={{ p: 2, color: "text.secondary" }}>
-            Order Review
-          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              p: 2,
+            }}
+          >
+            <Typography sx={{ color: "text.secondary" }}>
+              Order Review
+            </Typography>
+            <Box
+              sx={{
+                backgroundColor:
+                  props.orderDetail?.status === "cancelled"
+                    ? theme.palette.error.light
+                    : theme.palette.success.light,
+                px: "8px",
+                borderRadius: "12px",
+              }}
+            >
+              <Typography
+                sx={{
+                  color:
+                    props.orderDetail?.status === "cancelled"
+                      ? theme.palette.error.main
+                      : theme.palette.success.main,
+                }}
+              >
+                {props.orderDetail?.status}
+              </Typography>
+            </Box>
+          </Box>
         </StyledBox>
         <StyledBox
           sx={{
@@ -110,10 +141,13 @@ export default function SwipeableEdgeDrawer(props: Props) {
             buyerName={props.orderDetail?.userName}
           />
           <Divider />
-          <OrderProcess
-            orderStatus={props.orderDetail?.status}
-            orderId={props.orderDetail?._id.slice(0, 4)}
-          />
+          {props.orderDetail?.status !== "cancelled" && (
+            <OrderProcess
+              orderStatus={props.orderDetail?.status}
+              orderId={props.orderDetail?._id.slice(0, 4)}
+            />
+          )}
+
           <Divider />
           <Box py={2}>
             <DeliveryAddress deliverAdd={props.orderDetail?.address} />

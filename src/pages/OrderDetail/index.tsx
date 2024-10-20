@@ -41,7 +41,7 @@ function OrderDetail() {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={
-            { lat: orderDetail?.lat || -1, lng: orderDetail?.lng || -1 } ||
+            (orderDetail && { lat: orderDetail?.lat, lng: orderDetail?.lng }) ||
             defaultCoord
           }
           zoom={17}
@@ -55,13 +55,16 @@ function OrderDetail() {
         >
           <Marker
             position={
-              { lat: orderDetail?.lat || -1, lng: orderDetail?.lng || -1 } ||
+              (orderDetail && {
+                lat: orderDetail?.lat,
+                lng: orderDetail?.lng,
+              }) ||
               defaultCoord
             }
           />
         </GoogleMap>
       </Box>
-      <SwipeableEdgeDrawer orderDetail={orderDetail} />
+      {orderDetail && <SwipeableEdgeDrawer orderDetail={orderDetail} />}
     </Box>
   );
 }

@@ -132,6 +132,7 @@ function CheckoutContent(props: IcheckoutContent) {
       phoneNumber: confirmOrder.phone,
       notes: confirmOrder.note,
       totalPrice: getTotalPrice(),
+      address: placeName,
     };
     runCreateOrder(orderData);
   };
@@ -272,7 +273,7 @@ function CheckoutContent(props: IcheckoutContent) {
           <Button
             color="primary"
             variant="contained"
-            // disabled={!placeName}
+            disabled={!placeName}
             sx={{ borderRadius: 5, width: "100%", mb: 2, mt: 2 }}
             onClick={() => {
               if (authState?.isLogIn) {

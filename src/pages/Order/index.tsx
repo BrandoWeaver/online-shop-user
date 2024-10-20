@@ -24,9 +24,7 @@ function Order() {
     onSuccess: (data) => {
       console.log("dataOrdered", data);
     },
-
-    // cacheKey: `listOrder-${orderId}`,
-    // staleTime: -1,
+    ready: authState?.userId !== "",
     refreshDeps: [authState?.userId],
   });
   const { run: runCancelOrder, loading: loadingCancelOrder } = useRequest(

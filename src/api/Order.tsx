@@ -12,6 +12,7 @@ interface IorderData {
   phoneNumber: string;
   notes: string;
   totalPrice: number;
+  address: string;
 }
 const ORDER_API = {
   getListOrder: async (data: { userId: string }) => {
@@ -40,6 +41,7 @@ const ORDER_API = {
       notes: orderData.notes,
       items: orderData.items,
       totalPrice: orderData.totalPrice,
+      address: orderData.address,
     });
     return res.data;
   },

@@ -12,6 +12,7 @@ import {
 import { styled } from "@mui/system";
 import { ROUTE_PATH } from "../../utils/route-util";
 import { useNavigate } from "react-router-dom";
+import theme from "../../themes";
 export interface OrderItemProps {
   notes: string;
   status: string;
@@ -54,7 +55,6 @@ const OrderItem: React.FC<OrderItemProps> = ({
   setOrderId,
   orderId,
 }) => {
-  const theme = useTheme();
   const navigate = useNavigate();
   return (
     <Paper elevation={3} sx={{ borderRadius: 2, p: 2, mb: 2 }}>
@@ -67,7 +67,7 @@ const OrderItem: React.FC<OrderItemProps> = ({
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Avatar
-            src="/path/to/logo.jpg"
+            src={`${process.env.REACT_APP_PUBLIC_URL}assets/images/logo.png`}
             sx={{ mr: 2, width: 48, height: 48 }}
           />
           <Box>
@@ -79,18 +79,27 @@ const OrderItem: React.FC<OrderItemProps> = ({
             </Typography>
           </Box>
         </Box>
-        <Typography
-          variant="body2"
+        <Box
           sx={{
-            backgroundColor: "#d4edda",
-            color: "#155724",
-            px: 1.5,
-            py: 0.5,
-            borderRadius: 2,
+            backgroundColor:
+              status === "cancelled"
+                ? theme.palette.error.light
+                : theme.palette.success.light,
+            px: "8px",
+            borderRadius: "12px",
           }}
         >
-          {status}
-        </Typography>
+          <Typography
+            sx={{
+              color:
+                status === "cancelled"
+                  ? theme.palette.error.main
+                  : theme.palette.success.main,
+            }}
+          >
+            {status}
+          </Typography>
+        </Box>
       </Box>
       <Box sx={{ display: "flex", mt: 2, overflowX: "auto" }}>
         {items &&

@@ -15,7 +15,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { ROUTE_PATH } from "../../utils/route-util";
 import { useRequest } from "ahooks";
 import { Auth } from "../../api/Auth";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { LoadingSpiner } from "../../components/Loading";
 import theme from "../../themes";
@@ -32,6 +32,7 @@ const Login = () => {
   const { control, handleSubmit, watch } = useForm<Iform>();
   const { setAuthState } = useAuthContext();
   // const theme = useTheme();
+  const navigate = useNavigate();
   const {
     runAsync: runLogin,
     data: login,
@@ -84,7 +85,7 @@ const Login = () => {
                 background: theme.palette.background.default,
               }}
               onClick={() => {
-                window.history.back();
+                navigate(ROUTE_PATH.root);
               }}
             >
               <ArrowBackIcon sx={{ color: theme.palette.grey["600"] }} />

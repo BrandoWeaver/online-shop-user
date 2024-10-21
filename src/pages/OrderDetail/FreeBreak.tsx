@@ -15,7 +15,10 @@ const FeeBreakdown = (props: Props) => {
       </Typography>
       <Box display="flex" justifyContent="space-between" mb={1}>
         <Typography variant="body1">Subtotal</Typography>
-        <Typography variant="body1">${subtotal.toFixed(2)}</Typography>
+        <Typography variant="body1">
+          {" "}
+          ${props?.totalPrice && props?.totalPrice.toFixed(2)}
+        </Typography>
       </Box>
       <Box display="flex" justifyContent="space-between" mb={1}>
         <Typography variant="body1">Delivery Fee</Typography>

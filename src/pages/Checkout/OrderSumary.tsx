@@ -79,7 +79,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
             </Grid>
             <Grid item xs={4}>
               <Typography variant="body1" align="right">
-                ${summary.subtotal.toFixed(2)}
+                ${totoalPrice.toFixed(2)}
               </Typography>
             </Grid>
           </Grid>

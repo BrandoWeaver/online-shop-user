@@ -89,13 +89,17 @@ function Search() {
               borderRadius: 27,
             }}
           >
-            <IconButton sx={{ p: "10px" }} aria-label="menu">
+            <IconButton
+              sx={{ p: "10px", color: theme.palette.grey["500"] }}
+              aria-label="menu"
+            >
               <SearchIcon />
             </IconButton>
             <InputBase
               sx={{
                 ml: 1,
                 flex: 1,
+                color: theme.palette.grey["900"],
               }}
               placeholder={t("Search")}
               onChange={(e) => setSearchProduct(e.target.value)}
@@ -124,7 +128,12 @@ function Search() {
                       );
                     }}
                   >
-                    <Typography variant="body2">{category.name}</Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{ color: theme.palette.grey["900"] }}
+                    >
+                      {category.name}
+                    </Typography>
                   </Paper>
                 </Grid>
               ))}

@@ -2,7 +2,7 @@ import { useContext, useRef, useState } from "react";
 import CateHead from "./categoryHead";
 import { useRequest } from "ahooks";
 import { PRODUCT_API } from "../../api/Product";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Paper, Typography } from "@mui/material";
 import ProductCard from "../Product/productCard";
 import { LoadingSpiner } from "../../components/Loading";
 import { useNavigate, useParams } from "react-router-dom";
@@ -91,20 +91,23 @@ function CategoryList() {
                     setDrawerOpen(true);
                   }}
                 >
-                  <ProductCard
-                    image={product.image}
-                    price={product.price}
-                    name={product.name}
-                    _id={product._id}
-                    description={product.description}
-                    cate_id={product.cate_id}
-                    quantity={product.quantity}
-                    status={product.status}
-                    createdAt={product.createdAt}
-                    updatedAt={product.updatedAt}
-                    __v={product.__v}
-                    width="auto"
-                  />
+                  <Paper elevation={3} sx={{ borderRadius: 2 }}>
+                    <ProductCard
+                      image={product.image}
+                      price={product.price}
+                      name={product.name}
+                      _id={product._id}
+                      description={product.description}
+                      cate_id={product.cate_id}
+                      quantity={product.quantity}
+                      status={product.status}
+                      createdAt={product.createdAt}
+                      updatedAt={product.updatedAt}
+                      __v={product.__v}
+                      width="auto"
+                      height="170"
+                    />
+                  </Paper>
                 </Grid>
               ))}
           </Grid>

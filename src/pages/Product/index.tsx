@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from "react";
-import { Box, Skeleton, Typography, useTheme } from "@mui/material";
+import { Box, Paper, Skeleton, Typography, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ROUTE_PATH } from "../../utils/route-util";
 import ErrorResponse from "../../components/ErrorResponse";
@@ -190,23 +190,27 @@ function Product() {
                       }}
                       sx={{
                         mr: 1,
+                        py: 1,
                       }}
                     >
-                      <ProductCard
-                        isProductIdIncluded={isProductIdIncluded}
-                        image={product.image}
-                        price={product.price}
-                        name={product.name}
-                        _id={product._id}
-                        description={product.description}
-                        cate_id={product.cate_id}
-                        quantity={product.quantity}
-                        status={product.status}
-                        createdAt={product.createdAt}
-                        updatedAt={product.updatedAt}
-                        __v={product.__v}
-                        width="190px"
-                      />
+                      <Paper elevation={3} sx={{ borderRadius: 2 }}>
+                        <ProductCard
+                          isProductIdIncluded={isProductIdIncluded}
+                          image={product.image}
+                          price={product.price}
+                          name={product.name}
+                          _id={product._id}
+                          description={product.description}
+                          cate_id={product.cate_id}
+                          quantity={product.quantity}
+                          status={product.status}
+                          createdAt={product.createdAt}
+                          updatedAt={product.updatedAt}
+                          __v={product.__v}
+                          width="190px"
+                          height="170"
+                        />
+                      </Paper>
                     </Box>
                   );
                 })}
@@ -287,23 +291,26 @@ function Product() {
                         console.log("productDetail", product);
                         setProdudctDetail(product);
                       }}
-                      sx={{ mr: 1, pb: 8 }}
+                      sx={{ mr: 1, pb: 8, pt: 1 }}
                     >
-                      <ProductCard
-                        isProductIdIncluded={isProductIdIncluded}
-                        image={product.image}
-                        price={product.price}
-                        name={product.name}
-                        _id={product._id}
-                        description={product.description}
-                        cate_id={product.cate_id}
-                        quantity={product.quantity}
-                        status={product.status}
-                        createdAt={product.createdAt}
-                        updatedAt={product.updatedAt}
-                        __v={product.__v}
-                        width="190px"
-                      />
+                      <Paper elevation={3} sx={{ borderRadius: 2 }}>
+                        <ProductCard
+                          isProductIdIncluded={isProductIdIncluded}
+                          image={product.image}
+                          price={product.price}
+                          name={product.name}
+                          _id={product._id}
+                          description={product.description}
+                          cate_id={product.cate_id}
+                          quantity={product.quantity}
+                          status={product.status}
+                          createdAt={product.createdAt}
+                          updatedAt={product.updatedAt}
+                          __v={product.__v}
+                          width="190px"
+                          height="170"
+                        />
+                      </Paper>
                     </Box>
                   );
                 })}

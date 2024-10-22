@@ -68,6 +68,12 @@ const Sidebar = () => {
     changeLng(lng);
   };
 
+  const handleTelegramClick = () => {
+    window.open("https://t.me/BrandoWeaver", "_blank");
+  };
+  const handleFacebookClick = () => {
+    window.open("https://www.facebook.com/BrandoWeaver2002/", "_blank");
+  };
   return (
     <Box
       p={3}
@@ -232,10 +238,18 @@ const Sidebar = () => {
           {t("FOLLOW US")}
         </Typography>
         <Box display="flex" justifyContent="center" mt={1}>
-          <IconButton href="#" style={{ color: "#3b5998" }}>
+          <IconButton
+            href="#"
+            style={{ color: "#3b5998" }}
+            onClick={() => handleFacebookClick()}
+          >
             <FacebookIcon />
           </IconButton>
-          <IconButton href="#" style={{ color: "#0088cc" }}>
+          <IconButton
+            href="#"
+            style={{ color: "#0088cc" }}
+            onClick={() => handleTelegramClick()}
+          >
             <TelegramIcon />
           </IconButton>
         </Box>

@@ -6,6 +6,7 @@ import {
   useTheme,
   Grid,
   Box,
+  Paper,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SearchIcon from "@mui/icons-material/Search";
@@ -50,7 +51,14 @@ function PopularProduct() {
   return (
     <div>
       <ErrDialog ref={errRef} />
-      <Toolbar>
+      <Toolbar
+        sx={{
+          position: "sticky",
+          top: 0,
+          zIndex: "1000",
+          background: theme.palette.background.default,
+        }}
+      >
         <IconButton
           edge="start"
           color="default"
@@ -79,7 +87,7 @@ function PopularProduct() {
           <SearchIcon />
         </IconButton>
       </Toolbar>
-      <Grid container spacing={1} sx={{ paddingLeft: 2, marginTop: 2 }}>
+      <Grid container spacing={1} sx={{ px: 2, marginTop: 2 }}>
         {loadingProduct ? (
           <Grid
             item
@@ -107,20 +115,23 @@ function PopularProduct() {
                     setDrawerOpen(true);
                   }}
                 >
-                  <ProductCard
-                    image={product.image}
-                    price={product.price}
-                    name={product.name}
-                    _id={product._id}
-                    description={product.description}
-                    cate_id={product.cate_id}
-                    quantity={product.quantity}
-                    status={product.status}
-                    createdAt={product.createdAt}
-                    updatedAt={product.updatedAt}
-                    __v={product.__v}
-                    width="auto"
-                  />
+                  <Paper elevation={3} sx={{ borderRadius: 2 }}>
+                    <ProductCard
+                      image={product.image}
+                      price={product.price}
+                      name={product.name}
+                      _id={product._id}
+                      description={product.description}
+                      cate_id={product.cate_id}
+                      quantity={product.quantity}
+                      status={product.status}
+                      createdAt={product.createdAt}
+                      updatedAt={product.updatedAt}
+                      __v={product.__v}
+                      width="auto"
+                      height="170"
+                    />
+                  </Paper>
                 </Grid>
               ))}
             {errorProduct && (

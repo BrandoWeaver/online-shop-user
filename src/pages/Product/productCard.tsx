@@ -12,6 +12,7 @@ import { CartContext } from "../../contexts/CartContext";
 import { MdOutlineRemove } from "react-icons/md";
 interface IproductCard extends Iproduct.Product {
   width: string;
+  height: string;
 }
 const ProductCard = (props: IproductCard) => {
   const theme = useTheme();
@@ -38,7 +39,7 @@ const ProductCard = (props: IproductCard) => {
         <CardMedia
           component="img"
           alt={props.name}
-          height="140"
+          height={props.height}
           image={props.image}
           title={props.name}
           style={{ borderRadius: 10 }}

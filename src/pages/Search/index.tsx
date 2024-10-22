@@ -175,6 +175,7 @@ function Search() {
                           updatedAt={product.updatedAt}
                           __v={product.__v}
                           width="auto"
+                          height="170"
                         />
                       </Paper>
                     </Grid>

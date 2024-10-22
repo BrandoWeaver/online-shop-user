@@ -7,7 +7,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SearchIcon from "@mui/icons-material/Search";
 import { useRequest } from "ahooks";
@@ -19,6 +19,8 @@ import { useNavigate } from "react-router-dom";
 import { ROUTE_PATH } from "../../utils/route-util";
 import { useTranslation } from "react-i18next";
 import ErrDialog, { IErrDialogRef } from "../../components/Dialog/ErrorDialog";
+import CheckoutButton from "../Cart/CheckoutButton";
+import { CartContext } from "../../contexts/CartContext";
 
 // const categories = [
 //   "Vegetables",
@@ -35,6 +37,8 @@ function Search() {
   const theme = useTheme();
   const navigate = useNavigate();
   const { categories } = useAuthContext();
+  const { cart, getTotalPrice, getProductIds } = useContext(CartContext)!;
+
   const { t } = useTranslation();
   const [searchProduct, setSearchProduct] = useState("");
   const { loading: loadingList, data: allProduct } = useRequest(
@@ -157,20 +161,22 @@ function Search() {
                 {allProduct &&
                   allProduct.products.map((product, index) => (
                     <Grid item xs={6} key={product._id}>
-                      <ProductCard
-                        image={product.image}
-                        price={product.price}
-                        name={product.name}
-                        _id={product._id}
-                        description={product.description}
-                        cate_id={product.cate_id}
-                        quantity={product.quantity}
-                        status={product.status}
-                        createdAt={product.createdAt}
-                        updatedAt={product.updatedAt}
-                        __v={product.__v}
-                        width="auto"
-                      />
+                      <Paper elevation={3} sx={{ borderRadius: 2 }}>
+                        <ProductCard
+                          image={product.image}
+                          price={product.price}
+                          name={product.name}
+                          _id={product._id}
+                          description={product.description}
+                          cate_id={product.cate_id}
+                          quantity={product.quantity}
+                          status={product.status}
+                          createdAt={product.createdAt}
+                          updatedAt={product.updatedAt}
+                          __v={product.__v}
+                          width="auto"
+                        />
+                      </Paper>
                     </Grid>
                   ))}
               </Grid>
@@ -178,6 +184,17 @@ function Search() {
           </>
         )}
       </Box>
+      {!loadingList && searchProduct !== "" && cart.length > 0 && (
+        <Box position={"fixed"} bottom={7} width={"100%"} px={2}>
+          <CheckoutButton
+            count={getProductIds().length || 0}
+            total={getTotalPrice()}
+            handleOnClick={() => {
+              navigate(ROUTE_PATH.cart);
+            }}
+          />
+        </Box>
+      )}
     </Box>
   );
 }

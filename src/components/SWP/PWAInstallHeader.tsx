@@ -1,5 +1,4 @@
 // src/components/PWAInstallHeader.tsx
-import React from "react";
 import {
   AppBar,
   Toolbar,

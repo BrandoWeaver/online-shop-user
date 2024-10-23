@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress, {
@@ -7,8 +5,9 @@ import CircularProgress, {
   CircularProgressProps,
 } from "@mui/material/CircularProgress";
 import { SxProps } from "@mui/material";
+import { memo } from "react";
 
-const LoadingSpiner = React.memo((props?: CircularProgressProps) => {
+const LoadingSpiner = memo((props?: CircularProgressProps) => {
   return (
     <Box sx={{ position: "relative", lineHeight: 0 }}>
       <CircularProgress
@@ -46,7 +45,7 @@ interface IBackdropLoading extends CircularProgressProps {
   backdropSx?: SxProps;
 }
 
-const BackdropLoading = React.memo(
+const BackdropLoading = memo(
   ({ open = false, backdropSx, ...rest }: IBackdropLoading) => {
     return (
       <Backdrop

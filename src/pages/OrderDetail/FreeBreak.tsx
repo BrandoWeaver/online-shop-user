@@ -4,7 +4,6 @@ interface Props {
   totalPrice: number | undefined;
 }
 const FeeBreakdown = (props: Props) => {
-  const subtotal = 0.0;
   const deliveryFee = 0.0;
   const discount = 0.0;
 
@@ -16,7 +15,6 @@ const FeeBreakdown = (props: Props) => {
       <Box display="flex" justifyContent="space-between" mb={1}>
         <Typography variant="body1">Subtotal</Typography>
         <Typography variant="body1">
-          {" "}
           ${props?.totalPrice && props?.totalPrice.toFixed(2)}
         </Typography>
       </Box>

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import InboxTabs from "./MyInbox";
 import { useRequest } from "ahooks";
 import { NOTIFICATION_API } from "../../api/Notification";

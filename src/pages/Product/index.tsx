@@ -18,26 +18,25 @@ function Product() {
   const errRef = useRef<IErrDialogRef>(null);
   const navigate = useNavigate();
   const { setCategories } = useAuthContext();
-  const [callData, setCallNewData] = useState(1);
+  const callData = 1;
   const { cart } = useContext(CartContext)!;
   const [produtDetail, setProdudctDetail] = useState<Iproduct.Product>();
   const [drawerOpen, setDrawerOpen] = React.useState(false);
-  const {
-    runAsync: fetchProductList,
-    loading: loadingLogin,
-    data: allProduct,
-    error: errorListProduct,
-  } = useRequest(PRODUCT_API.listProduct, {
-    onSuccess: (data) => {
-      console.log("SuccessRes", data);
-    },
-    onError: (err) => {
-      console.log("errRes", err);
-      errRef.current?.open("Error Occured");
-    },
-    cacheKey: `listProduct-${callData}`,
-    staleTime: -1,
-  });
+  const { data: listshopBanner, loading: loadingshopBanner } = useRequest(
+    ShopBanner.shopBanner,
+    {
+      onSuccess: (data) => {
+        console.log("listshopBanner", data);
+      },
+      onError: (err) => {
+        console.log("listshopBanner", err);
+        errRef.current?.open("Error Occured");
+      },
+      cacheKey: `listpopularProduct-${callData}`,
+      staleTime: -1,
+    }
+  );
+
   const { loading: loadingCategories, data: allCategories } = useRequest(
     PRODUCT_API.listCategory,
     {
@@ -64,7 +63,7 @@ function Product() {
     fetchProductList();
   };
   const { data: allPopularProduct, error: errorListPopularProduct } =
-    useRequest(() => PRODUCT_API.pupularProduct(2), {
+    useRequest(() => PRODUCT_API.pupularProduct(10), {
       onSuccess: (data) => {
         console.log("SuccessRes", data);
       },
@@ -75,19 +74,19 @@ function Product() {
       cacheKey: `listBanner-${callData}`,
     });
   const {
-    data: listshopBanner,
-    loading: loadingshopBanner,
-    error: errorshopBanner,
-  } = useRequest(ShopBanner.shopBanner, {
+    runAsync: fetchProductList,
+    loading: loadingLogin,
+    data: allProduct,
+    error: errorListProduct,
+  } = useRequest(PRODUCT_API.listProduct, {
     onSuccess: (data) => {
-      console.log("listshopBanner", data);
+      console.log("SuccessRes", data);
     },
     onError: (err) => {
-      console.log("listshopBanner", err);
+      console.log("errRes", err);
       errRef.current?.open("Error Occured");
     },
-    cacheKey: `listpopularProduct-${callData}`,
-    staleTime: -1,
+    cacheKey: `listProduct-${callData}`,
   });
   return (
     <Box

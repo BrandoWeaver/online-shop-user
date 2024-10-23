@@ -8,7 +8,6 @@ function Account() {
   if (!authState?.isLogIn) {
     return <Navigate to={ROUTE_PATH.login} replace />;
   }
-
   return (
     <div>
       <Sidebar />

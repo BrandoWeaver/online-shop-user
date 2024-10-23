@@ -1,5 +1,4 @@
 import { Box, IconButton, Toolbar, Typography, useTheme } from "@mui/material";
-import React from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CheckoutContent from "./CheckoutContent";
 import { useAuthContext } from "../../contexts/AuthContext";

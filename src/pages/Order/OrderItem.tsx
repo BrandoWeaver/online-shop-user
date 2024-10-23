@@ -7,7 +7,6 @@ import {
   Badge,
   Paper,
   Divider,
-  useTheme,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { ROUTE_PATH } from "../../utils/route-util";

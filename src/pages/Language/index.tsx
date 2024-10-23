@@ -1,7 +1,6 @@
 // Import statements
-import React, { useState } from "react";
+import React from "react";
 import {
-  Button,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -10,7 +9,6 @@ import {
   ListItemText,
   ListItemIcon,
   IconButton,
-  makeStyles,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";

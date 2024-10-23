@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import {
   Toolbar,
   IconButton,
@@ -23,7 +23,6 @@ import CheckoutButton from "../Cart/CheckoutButton";
 import { CartContext } from "../../contexts/CartContext";
 import { useTranslation } from "react-i18next";
 import ErrDialog, { IErrDialogRef } from "../../components/Dialog/ErrorDialog";
-import { ShopBanner } from "../../api/ShopBanner";
 
 function PopularProduct() {
   const navigate = useNavigate();
